@@ -7,8 +7,9 @@ import io.proyection.projection.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 @Service
 public class UserService {
@@ -67,5 +68,35 @@ public class UserService {
         }catch (Exception e){
             return false;
         }
+    }
+
+    public boolean register(String email, String password) {
+        // TODO Auto-generated method stub
+        boolean flag = false;
+        try {
+            Connection conex = Conexion.conectar();
+
+
+
+          String sql = "insert into user"
+                        + " (null, null, null, password, username)"
+                        + " values(?, ?, ?, ?, ?)";
+
+            PreparedStatement pstmt = conex.prepareStatement(sql);
+            pstmt.setString(4, password);
+            pstmt.setString(5, email);
+
+            int filas =	pstmt.executeUpdate();
+            Conexion.cerrar(conex);
+
+            if(filas == 1) {
+                flag = true;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return flag;
     }
 }
