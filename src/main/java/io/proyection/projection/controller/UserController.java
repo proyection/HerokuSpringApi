@@ -73,8 +73,8 @@ public class UserController {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null) return errorMap;
 
-        Boolean newUser = userService.register(user.getUsername(), user.getPassword());
+        User newUser = userService.saveUser(user);
 
-        return new ResponseEntity<Boolean>(newUser, HttpStatus.CREATED);
+        return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
     }
 }

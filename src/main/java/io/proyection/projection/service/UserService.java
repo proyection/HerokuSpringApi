@@ -78,9 +78,9 @@ public class UserService {
 
 
 
-          String sql = "insert into user"
-                        + " (null, null, null, password, username)"
-                        + " values(?, ?, ?, ?, ?)";
+            String sql = "insert into user"
+                    + " (null, null, null, password, username)"
+                    + " values(?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = conex.prepareStatement(sql);
             pstmt.setString(4, password);
