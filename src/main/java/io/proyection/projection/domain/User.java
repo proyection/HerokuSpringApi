@@ -19,10 +19,10 @@ public class User implements UserDetails {
     private Long id;
 
     @Email(message = "Email needs to have correct format")
-    @NotBlank(message = "email is required")
+    @NotBlank(message = "Username cannot be blank")
     @Column(unique = true)
     private String username;
-    @NotBlank(message = "Password field is required")
+    @NotBlank(message = "Password must not be empty")
     private String password;
     @Transient
     private String confirmPassword;
